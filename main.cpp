@@ -54,7 +54,7 @@ void Graph::DFS(int v, string num){
     return;
   }
 
-	// Mark the current node as visited and
+	// Mark the current node as visited
 	visited[v] = true;
 
   //Método encriptar
@@ -123,7 +123,7 @@ void Graph::Encrypt(int v, string num){
 
     case 6:
       if(realnum == 1){
-        resultado.append("F"); contador++; operaciones++;
+        resultado.append("G"); contador++; operaciones++;
       }
       return;
 
@@ -219,7 +219,7 @@ int main() {
       cout<<"Input incorrecto, por favor sólo inputs númericos sin espacios 1 al 6."<<endl;
       abort();
     }
-    if(catcher>6){
+    if(catcher>6 || catcher<0){
       cout<<"Input incorrecto, por favor sólo inputs númericos sin espacios del 1 al 6."<<endl;
       abort();
     }
