@@ -9,9 +9,11 @@ ITESM CSF
 */
 
 #include <iostream>
-#include <bits/stdc++.h>
 #include <string> 
 #include <chrono>
+#include <map>
+#include <list>
+#include <fstream>
 using namespace std;
 using namespace std::chrono;
 
@@ -19,7 +21,7 @@ class Graph{
 public:
   //Variables
 	map<int, bool> visited;
-	map<int, list<int>> adj;
+	map<int, list<int> > adj;
   int contador = 0;
   int operaciones = 0;
   string resultado;
@@ -46,7 +48,6 @@ void Graph::AddEdge(int v, int w){
 void Graph::DFS(int v, string num){
   if(visited[14]==true && contador<num.length()){  //Resetting the tree
     for(int m = 0; m <= 14; m++){
-      operaciones++;
       visited[m] = false;
     }
   }
@@ -56,6 +57,7 @@ void Graph::DFS(int v, string num){
 
 	// Mark the current node as visited
 	visited[v] = true;
+  operaciones++;
 
   //Método encriptar
   Encrypt(v, num);
@@ -64,7 +66,7 @@ void Graph::DFS(int v, string num){
 	// to this vertex
 	list<int>::iterator i;
 	for (i = adj[v].begin(); i != adj[v].end(); ++i){
-  	operaciones++;
+    operaciones++;
     if (!visited[*i]){
       DFS(*i, num);
     }
@@ -73,7 +75,7 @@ void Graph::DFS(int v, string num){
 
 void Graph::Encrypt(int v, string num){
   char ctemp = num[contador];
-  string stemp{ctemp};
+  string stemp(1, ctemp);
   int realnum;
 
   try {
@@ -87,130 +89,111 @@ void Graph::Encrypt(int v, string num){
   switch(v){
     case 0:
       if(realnum == 1){
-        resultado.append("A"); contador++; operaciones++;
+        resultado.append("A"); contador++;
       }
       return;
 
     case 1:
       if(realnum == 2){
-        resultado.append("B"); contador++; operaciones++;
+        resultado.append("B"); contador++;
       }
       return;
 
     case 2:
       if(realnum == 5){
-        resultado.append("C"); contador++; operaciones++;
+        resultado.append("C"); contador++;
       }
       return;
 
     case 3:
       if(realnum == 6){
-        resultado.append("D"); contador++; operaciones++;
+        resultado.append("D"); contador++;
       }
       return;
 
     case 4:
       if(realnum == 3){
-        resultado.append("E"); contador++; operaciones++;
+        resultado.append("E"); contador++;
       }
       return;
 
     case 5:
       if(realnum == 4){
-        resultado.append("F"); contador++; operaciones++;
+        resultado.append("F"); contador++;
       }
       return;
 
     case 6:
       if(realnum == 1){
-        resultado.append("G"); contador++; operaciones++;
+        resultado.append("G"); contador++;
       }
       return;
 
     case 7:
       if(realnum == 2){
-        resultado.append("H"); contador++; operaciones++;
+        resultado.append("H"); contador++;
       }
       return;
 
     case 8:
       if(realnum == 6){
-        resultado.append("I"); contador++; operaciones++;
+        resultado.append("B"); contador++;
       }
       return;
 
     case 9:
       if(realnum == 3){
-        resultado.append("J"); contador++; operaciones++;
+        resultado.append("F"); contador++;
       }
       return;
 
     case 10:
       if(realnum == 2){
-        resultado.append("L"); contador++; operaciones++;
+        resultado.append("D"); contador++;
       }
       return;
 
     case 11:
       if(realnum == 6){
-        resultado.append("M"); contador++; operaciones++;
+        resultado.append("E"); contador++;
       }
       return;
 
     case 12:
       if(realnum == 4){
-        resultado.append("K"); contador++; operaciones++;
+        resultado.append("C"); contador++;
       }
       return;
 
     case 13:
       if(realnum == 1){
-        resultado.append("N"); contador++; operaciones++;
+        resultado.append("H"); contador++;
       }
       return;
 
     case 14:
       if(realnum == 5){
-        resultado.append("P"); contador++; operaciones++;
+        resultado.append("G"); contador++;
       }
       return;
   } 
 }
 
 void Graph::ResOperaciones(){
-  cout<<"Resultado: "<<resultado<<endl;
   cout<<"Operaciones: "<<operaciones<<endl;
+  cout<<"Resultado: "<<resultado<<endl;
 }
 
 // Driver code
 int main() {
 
   //input system
-  string file;
-  cin>>file;
-  ifstream inFile;
-  inFile.open(file);
-
-  if (!inFile) {
-    cerr << "Unable to open file datafile.txt";
-    exit(1);   // call system to stop
-  }
-
   string num; //variable para el input del txt
-  int counter = -1;
-
-  string test; //varible temporal
-  while (getline(inFile, test)) { //read and define num
-    if(counter == 0) {
-      num = test;
-      counter++;
-    }
-    counter++;
-  }
+  cin>>num;
 
   for(int j = 0; j<=num.length()-1;j++){
     char ctemp = num[j];
-    string stemp{ctemp};
+    string stemp(1, ctemp);
     int catcher; //variable usada para verificar input correcto
     try {
       catcher = stoi(stemp);
@@ -256,8 +239,8 @@ int main() {
   auto stop = high_resolution_clock::now();
   auto duration = duration_cast<microseconds>(stop - start);
 
-  g.ResOperaciones();
   cout <<"Tiempo: " << duration.count() << " microsegundos" << endl;
+  g.ResOperaciones();
   
 	return 0;
 }
